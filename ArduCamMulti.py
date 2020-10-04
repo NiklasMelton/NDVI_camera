@@ -10,7 +10,7 @@ class MultiCamera:
     def __init__(self):
         # self.bus = smbus.SMBus(i2c_ch)
         self.camera = picamera.PiCamera()
-        self.camera.resolution(1920,1080)
+        self.camera.resolution = (1920,1080)
         gpio.setmode(gpio.BCM)
         gpio.setup(17, gpio.OUT)
         gpio.setup(4, gpio.OUT)
