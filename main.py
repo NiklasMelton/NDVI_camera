@@ -1,1 +1,33 @@
 import tm1637
+import datetime
+import ArduCamMulti
+import time
+
+class display:
+    def __init__(self):
+        self.display = tm1637.TM1637(23,24, brightness=1.0)
+        self.display.Clear()
+
+    def show_int(self,int):
+        self.display.Clear()
+        self.display.ShowDoublepoint(False)
+        self.display.ShowInt(int)
+
+    def show_time(self):
+        t = datetime.datetime.today().time()
+        h = t.hour
+        m = t.minute
+        self.display.Clear()
+        self.display.ShowDoublepoint(True)
+        self.display.Show([int(h/10),int(h%10),int(m/10),int(m%10)])
+
+    def show_null(self):
+        self.display.Clear()
+        self.display.ShowDoublepoint(False)
+        self.display.Show([-1,-1,-1,-1])
+
+if __name__ == '__main__':
+    d = display()
+    while True:
+        d.show_time()
+        time.sleep(10)
