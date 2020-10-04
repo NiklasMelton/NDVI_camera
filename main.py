@@ -15,11 +15,13 @@ class display:
 
     def show_time(self):
         t = datetime.datetime.today().time()
-        h = t.hour
-        m = t.minute
+        h = str(t.hour)
+        m = str(t.minute-40)
+        if len(m) < 2:
+            m = '0'+m
         self.display.Clear()
         self.display.ShowDoublepoint(True)
-        self.display.ShowInt(int(str(h)+str(m)))
+        self.display.ShowInt(int(h+m))
 
     def show_null(self):
         self.display.Clear()
