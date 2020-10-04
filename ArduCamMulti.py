@@ -15,11 +15,11 @@ class MultiCamera:
         gpio.output(17, 0)
 
     def select_camera_A(self):
-        gpio.output(4, 0)
+        # gpio.output(4, 0)
         # self.bus.write_i2c_block_data(i2c_address, 0x00, 0x01)
         os.system('i2cset -y 1 0x70 0x00 0x01')
     def select_camera_B(self):
-        gpio.output(4, 1)
+        # gpio.output(4, 1)
         # self.bus.write_i2c_block_data(i2c_address, 0x00, 0x02)
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
