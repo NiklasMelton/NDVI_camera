@@ -8,7 +8,7 @@ i2c_address = 0x70
 class MultiCamera:
     def __init__(self):
         self.bus = smbus.SMBus(i2c_ch)
-        gpio.setmode(gpio.BOARD)
+        gpio.setmode(gpio.BCM)
         gpio.setup(17, gpio.OUT)
         gpio.setup(4, gpio.OUT)
         gpio.output(4, 0)
