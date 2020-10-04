@@ -29,7 +29,7 @@ class MultiCamera:
     def capture(self,name):
         # cmd = "raspistill -o {}.jpg".format(name)
         # os.system(cmd)
-        self.camera.capture(name+'.png', 'png')
+        self.camera.capture(name+'.rgb', 'rgb')
 
 if __name__ == '__main__':
     mc = MultiCamera()
