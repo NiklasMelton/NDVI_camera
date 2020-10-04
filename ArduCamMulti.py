@@ -25,3 +25,13 @@ class MultiCamera:
     def capture(self,name):
         cmd = "raspistill -o {}.jpg",format(name)
         os.system(cmd)
+
+if __name__ == '__main__':
+    mc = MultiCamera()
+    mc.select_camera_A()
+    print('A')
+    mc.capture('camera1')
+    mc.select_camera_B()
+    print('B')
+    mc.capture('camera2')
+    print('complete')
