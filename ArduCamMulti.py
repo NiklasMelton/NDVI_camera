@@ -1,6 +1,7 @@
-import smbus
+
 import RPi.GPIO as gpio
 import os
+import picamera
 
 i2c_ch = 1
 i2c_address = 0x70
@@ -8,6 +9,8 @@ i2c_address = 0x70
 class MultiCamera:
     def __init__(self):
         # self.bus = smbus.SMBus(i2c_ch)
+        self.camera = picamera.PiCamera()
+        self.camera.resolution(1920,1080)
         gpio.setmode(gpio.BCM)
         gpio.setup(17, gpio.OUT)
         gpio.setup(4, gpio.OUT)
@@ -24,8 +27,9 @@ class MultiCamera:
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
     def capture(self,name):
-        cmd = "raspistill -o {}.jpg".format(name)
-        os.system(cmd)
+        # cmd = "raspistill -o {}.jpg".format(name)
+        # os.system(cmd)
+        self.camera.capture(name+'.data', 'yuv')
 
 if __name__ == '__main__':
     mc = MultiCamera()
