@@ -16,7 +16,7 @@ class display:
     def show_time(self):
         t = datetime.datetime.today().time()
         h = str(t.hour)
-        m = str(t.minute-40)
+        m = str(t.minute)
         if len(m) < 2:
             m = '0'+m
         self.display.Clear()
