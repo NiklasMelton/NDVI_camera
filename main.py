@@ -19,7 +19,7 @@ class display:
         m = t.minute
         self.display.Clear()
         self.display.ShowDoublepoint(True)
-        self.display.Show([int(h/10),int(h%10),int(m/10),int(m%10)])
+        self.display.ShowInt(int(str(h)+str(m)))
 
     def show_null(self):
         self.display.Clear()
