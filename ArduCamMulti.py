@@ -24,7 +24,7 @@ class MultiCamera:
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
     def capture(self,name):
-        cmd = "raspistill -o {}.jpg",format(name)
+        cmd = "raspistill -o {}.jpg".format(name)
         os.system(cmd)
 
 if __name__ == '__main__':
