@@ -83,7 +83,7 @@ class camera_box:
         self.DMUTEX = False
 
     def callback_shutter(self,channel):
-        print('Button pressed, channel '+channel)
+        print('Button pressed, channel '+str(channel))
         self.shutter()
 
 
