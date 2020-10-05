@@ -31,7 +31,10 @@ class Display:
             m = '0'+m
         self.display.Clear()
         self.display.ShowDoublepoint(True)
-        self.display.ShowInt(int(h+m))
+        if h == '0':
+            self.display.Show([0,0,int(m[0]),int(m[1])])
+        else:
+            self.display.ShowInt(int(h+m))
 
     def show_null(self):
         self.display.Clear()
@@ -50,6 +53,7 @@ def gen_filename(today=None):
 
 def increment_image_counter():
     inc = get_image_counter()+1
+    print('Writing counter')
     open(IMAGE_COUNTER_FILE,'w').write(str(inc))
     return inc
 
