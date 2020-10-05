@@ -33,9 +33,9 @@ class MultiCamera:
 
     def double_capture(self,filename):
         self.select_camera_A()
-        self.capture('CamA_'+filename)
+        self.capture(filename+'_CamA')
         self.select_camera_B()
-        self.capture('CamB_'+filename)
+        self.capture(filename+'_CamB')
 
 if __name__ == '__main__':
     mc = MultiCamera()
