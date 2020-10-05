@@ -53,12 +53,12 @@ def gen_filename(today=None):
 
 def increment_image_counter():
     inc = get_image_counter()+1
-    print('Writing counter')
+    # print('Writing counter')
     open(IMAGE_COUNTER_FILE,'w').write(str(inc))
     return inc
 
 def initialize_image_counter():
-    if not os.path.exists('image_counter.txt'):
+    if not os.path.exists(IMAGE_COUNTER_FILE):
         open(IMAGE_COUNTER_FILE, 'w').write(str(0))
         return 0
     else:
@@ -88,7 +88,7 @@ class camera_box:
 
     def callback_shutter(self,channel):
         gpio.remove_event_detect(BUTTON_CHANNEL)
-        print('Button pressed, channel '+str(channel))
+        # print('Button pressed, channel '+str(channel))
         self.shutter()
         gpio.add_event_detect(BUTTON_CHANNEL, gpio.FALLING, callback=self.callback_shutter,bouncetime=500)
 
