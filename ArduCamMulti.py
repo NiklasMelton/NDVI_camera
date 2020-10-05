@@ -26,7 +26,7 @@ class MultiCamera:
         # self.bus.write_i2c_block_data(i2c_address, 0x00, 0x02)
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
-    def capture(self,filename,ext='rgb'):
+    def capture(self,filename,ext='png'):
         # cmd = "raspistill -o {}.jpg".format(name)
         # os.system(cmd)
         self.camera.capture(filename+'.'+ext, ext)
