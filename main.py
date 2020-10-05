@@ -74,7 +74,7 @@ class camera_box:
         self.IMAGE_COUNT = initialize_image_counter()
 
         gpio.setup(BUTTON_CHANNEL, gpio.IN, pull_up_down=gpio.PUD_UP)
-        gpio.add_event_detect(BUTTON_CHANNEL, gpio.RISING, callback=self.callback_shutter,bouncetime=1000)
+        gpio.add_event_detect(BUTTON_CHANNEL, gpio.FALLING, callback=self.callback_shutter,bouncetime=500)
 
     def shutter(self,today=None):
         filename = DATA_PATH+gen_filename(today)
@@ -87,8 +87,10 @@ class camera_box:
         self.DMUTEX = False
 
     def callback_shutter(self,channel):
+        gpio.remove_event_detect(BUTTON_CHANNEL)
         print('Button pressed, channel '+str(channel))
         self.shutter()
+        gpio.add_event_detect(BUTTON_CHANNEL, gpio.FALLING, callback=self.callback_shutter,bouncetime=500)
 
 
 if __name__ == '__main__':
