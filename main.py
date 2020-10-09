@@ -7,7 +7,7 @@ import os
 
 SHUTTER_FREQ = 300
 BUTTON_CHANNEL = 18
-DATA_PATH = '/home/pi/NDVI_data/'
+DATA_PATH = '/mnt/DataUSB/NDVI/images'
 IMAGE_COUNTER_FILE = DATA_PATH+'image_counter.txt'
 os.makedirs(DATA_PATH,exist_ok=True)
 
