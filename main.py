@@ -7,7 +7,7 @@ import os
 
 SHUTTER_FREQ = 300
 BUTTON_CHANNEL = 18
-DATA_PATH = '/mnt/DataUSB/NDVI/images'
+DATA_PATH = '/mnt/DataUSB/NDVI/images/'
 IMAGE_COUNTER_FILE = DATA_PATH+'image_counter.txt'
 os.makedirs(DATA_PATH,exist_ok=True)
 
@@ -83,7 +83,6 @@ class camera_box:
         self.camera.double_capture(filename)
         self.IMAGE_COUNT = increment_image_counter()
         self.display.show_int(self.IMAGE_COUNT)
-        time.sleep(3)
         self.DMUTEX = False
 
     def callback_shutter(self,channel):
