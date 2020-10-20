@@ -39,16 +39,17 @@ class MultiCamera:
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
     def capture(self,filename,ext='png'):
-        # cmd = "raspistill -o {}.jpg".format(name)
+        # cmd = "raspistill -o {}".format(filename+'.'+ext)
         # os.system(cmd)
         self.camera.capture(filename+'.'+ext, ext)
 
     def double_capture(self,filename):
         self.select_camera_A()
         self.capture(filename+'_CamA')
-        time.sleep(1)
+        time.sleep(3)
         self.select_camera_B()
         self.capture(filename+'_CamB')
+        time.sleep(3)
 
 if __name__ == '__main__':
     mc = MultiCamera()
