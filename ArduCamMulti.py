@@ -16,7 +16,7 @@ class MultiCamera:
         if 'shutter' in kwargs:
             self.ss = kwargs['shutter']
         else:
-            self.ss = 10000
+            self.ss = 100000
         if 'iso' in kwargs:
             self.iso = kwargs['iso']
         else:
