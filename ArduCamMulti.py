@@ -1,7 +1,7 @@
 
 import RPi.GPIO as gpio
 import os
-import picamera
+# import picamera
 import time
 
 i2c_ch = 1
