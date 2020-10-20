@@ -10,18 +10,18 @@ i2c_address = 0x70
 class MultiCamera:
     def __init__(self,**kwargs):
         # self.bus = smbus.SMBus(i2c_ch)
-        self.camera = picamera.PiCamera()
-        self.camera.resolution = (1920,1088)
-        if 'shutter' in kwargs:
-            self.camera.shutter_speed = kwargs['shutter']
-            self.camera.exposure_mode = 'off'
-        if 'iso' in kwargs:
-            self.camera.iso = kwargs['iso']
-        else:
-            self.camera.iso = 100
-        g = self.camera.awb_gains
-        self.camera.awb_mode = 'off'
-        self.camera.awb_gains = g
+        # self.camera = picamera.PiCamera()
+        # self.camera.resolution = (1920,1088)
+        # if 'shutter' in kwargs:
+        #     self.camera.shutter_speed = kwargs['shutter']
+        #     self.camera.exposure_mode = 'off'
+        # if 'iso' in kwargs:
+        #     self.camera.iso = kwargs['iso']
+        # else:
+        #     self.camera.iso = 100
+        # g = self.camera.awb_gains
+        # self.camera.awb_mode = 'off'
+        # self.camera.awb_gains = g
 
         gpio.setmode(gpio.BCM)
         gpio.setup(17, gpio.OUT)
