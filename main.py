@@ -5,6 +5,8 @@ import time
 import RPi.GPIO as gpio
 import os
 
+gpio.setwarnings(False)
+
 SHUTTER_FREQ = 300
 BUTTON_CHANNEL = 18
 DATA_PATH = '/mnt/DataUSB/NDVI/images/'
@@ -85,6 +87,18 @@ class camera_box:
         self.display.show_int(self.IMAGE_COUNT)
         self.DMUTEX = False
 
+    def shutdown(self):
+        self.display.show_null()
+        time.sleep(0.3)
+        self.display.display.Clear()
+        time.sleep(0.3)
+        self.display.show_null()
+        time.sleep(0.3)
+        self.display.display.Clear()
+        time.sleep(0.3)
+        self.display.show_null()
+        os.system('shutdown 0')
+
     def callback_shutter(self,channel):
         gpio.remove_event_detect(BUTTON_CHANNEL)
         t0 = datetime.datetime.now()
@@ -94,20 +108,11 @@ class camera_box:
             dt = (datetime.datetime.now() - t0).seconds
             if dt > 2:
                 if display is None:
-                    display = tm1637.TM1637(23, 24, brightness=1.0)
+                    display = Display()
                 display.show_int(int(5-dt))
                 print(dt)
         if dt >= 5:
-            display.show_null()
-            time.sleep(0.3)
-            display.display.Clear()
-            time.sleep(0.3)
-            display.show_null()
-            time.sleep(0.3)
-            display.display.Clear()
-            time.sleep(0.3)
-            display.show_null()
-            os.system('shutdown 0')
+            self.shutdown()
         else:
             # print('Button pressed, channel '+str(channel))
             self.shutter()
