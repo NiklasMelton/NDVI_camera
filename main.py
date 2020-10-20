@@ -97,7 +97,8 @@ class camera_box:
         self.display.display.Clear()
         time.sleep(0.3)
         self.display.show_null()
-        os.system('shutdown 0')
+        os.system('sudo shutdown 0')
+        self.display.show_null()
 
     def callback_shutter(self,channel):
         gpio.remove_event_detect(BUTTON_CHANNEL)
