@@ -86,29 +86,32 @@ class camera_box:
         self.DMUTEX = False
 
     def callback_shutter(self,channel):
-        gpio.remove_event_detect(channel)
+        gpio.remove_event_detect(BUTTON_CHANNEL)
         t0 = datetime.datetime.now()
         dt = 0
-        while gpio.input(channel) and dt < 5.5:
+        display = None
+        while gpio.input(BUTTON_CHANNEL) and dt < 5.5:
             dt = (datetime.datetime.now() - t0).seconds
             if dt > 2:
-                self.display.show_int(int(5-dt))
+                if display is None:
+                    display = tm1637.TM1637(23, 24, brightness=1.0)
+                display.show_int(int(5-dt))
                 print(dt)
         if dt >= 5:
-            self.display.show_null()
+            display.show_null()
             time.sleep(0.3)
-            self.display.display.Clear()
+            display.display.Clear()
             time.sleep(0.3)
-            self.display.show_null()
+            display.show_null()
             time.sleep(0.3)
-            self.display.display.Clear()
+            display.display.Clear()
             time.sleep(0.3)
-            self.display.show_null()
+            display.show_null()
             os.system('shutdown 0')
         else:
             # print('Button pressed, channel '+str(channel))
             self.shutter()
-        gpio.add_event_detect(channel, gpio.FALLING, callback=self.callback_shutter,bouncetime=500)
+        gpio.add_event_detect(BUTTON_CHANNEL, gpio.FALLING, callback=self.callback_shutter,bouncetime=500)
 
 
 if __name__ == '__main__':
