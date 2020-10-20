@@ -11,17 +11,19 @@ class MultiCamera:
     def __init__(self,**kwargs):
         # self.bus = smbus.SMBus(i2c_ch)
         # self.camera = picamera.PiCamera()
-        # self.camera.resolution = (1920,1088)
-        # if 'shutter' in kwargs:
-        #     self.camera.shutter_speed = kwargs['shutter']
-        #     self.camera.exposure_mode = 'off'
-        # if 'iso' in kwargs:
-        #     self.camera.iso = kwargs['iso']
-        # else:
-        #     self.camera.iso = 100
-        # g = self.camera.awb_gains
-        # self.camera.awb_mode = 'off'
-        # self.camera.awb_gains = g
+        self.w = 1920
+        self.h = 1088
+        if 'shutter' in kwargs:
+            self.ss = kwargs['shutter']
+        else:
+            self.ss = 10000
+        if 'iso' in kwargs:
+            self.iso = kwargs['iso']
+        else:
+            self.iso = 100
+        g = self.camera.awb_gains
+        self.camera.awb_mode = 'off'
+        self.camera.awb_gains = g
 
         gpio.setmode(gpio.BCM)
         gpio.setup(17, gpio.OUT)
@@ -39,7 +41,7 @@ class MultiCamera:
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
     def capture(self,filename,ext='png'):
-        cmd = "raspistill -ISO 100 -ss 5000 -o {}".format(filename+'.'+ext)
+        cmd = "raspistill -ISO {} -ss {} -w {} -h {} -o {}".format(self.iso, self.ss, self.w, self.h,filename+'.'+ext)
         os.system(cmd)
         # self.camera.capture(filename+'.'+ext, ext)
 
