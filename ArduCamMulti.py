@@ -21,9 +21,6 @@ class MultiCamera:
             self.iso = kwargs['iso']
         else:
             self.iso = 100
-        g = self.camera.awb_gains
-        self.camera.awb_mode = 'off'
-        self.camera.awb_gains = g
 
         gpio.setmode(gpio.BCM)
         gpio.setup(17, gpio.OUT)
@@ -41,7 +38,7 @@ class MultiCamera:
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
     def capture(self,filename,ext='png'):
-        cmd = "raspistill -ISO {} -ss {} -w {} -h {} -o {}".format(self.iso, self.ss, self.w, self.h,filename+'.'+ext)
+        cmd = "raspistill -ISO {} -ss {} -w {} -h {} -awb off -awbg 1.0,1.0 -o {}".format(self.iso, self.ss, self.w, self.h,filename+'.'+ext)
         os.system(cmd)
         # self.camera.capture(filename+'.'+ext, ext)
 
