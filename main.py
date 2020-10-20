@@ -48,7 +48,7 @@ def gen_filename(today=None):
     if today is None:
         today = datetime.datetime.today()
     inc = get_image_counter()+1
-    filename = 'image_date_{}_{}_{}_time_{}_{}_count_{}'.format(today.year,today.month,today.day,today.hour,today.minute,inc)
+    filename = '{}_{}_{}_{}_{}_c_{}'.format(today.year,today.month,today.day,today.hour,today.minute,inc)
     return filename
 
 def increment_image_counter():
