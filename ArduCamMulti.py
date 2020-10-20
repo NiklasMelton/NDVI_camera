@@ -38,7 +38,7 @@ class MultiCamera:
         os.system('i2cset -y 1 0x70 0x00 0x02')
 
     def capture(self,filename,ext='png'):
-        cmd = "raspistill -ISO {} -ss {} -w {} -h {} -awb off -o {}".format(self.iso, self.ss, self.w, self.h,filename+'.'+ext)
+        cmd = "raspistill -ISO {} -ss {} -w {} -h {} -o {}".format(self.iso, self.ss, self.w, self.h,filename+'.'+ext)
         os.system(cmd)
         # self.camera.capture(filename+'.'+ext, ext)
 
