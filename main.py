@@ -110,6 +110,7 @@ class camera_box:
         while not gpio.input(BUTTON_CHANNEL) and dt < 5.5:
             dt = (datetime.datetime.now() - t0).seconds
             if dt >= 2:
+                self.DMUTEX = True
                 display = Display()
                 display.show_int(int(6-dt))
                 print(dt)
@@ -119,6 +120,7 @@ class camera_box:
         else:
             # print('Button pressed, channel '+str(channel))
             self.shutter()
+        self.DMUTEX = False
         gpio.add_event_detect(BUTTON_CHANNEL, gpio.FALLING, callback=self.callback_shutter,bouncetime=500)
 
 
