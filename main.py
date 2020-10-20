@@ -104,6 +104,7 @@ class camera_box:
         t0 = datetime.datetime.now()
         dt = 0
         display = None
+        print('callback:',gpio.input(BUTTON_CHANNEL))
         while gpio.input(BUTTON_CHANNEL) and dt < 5.5:
             dt = (datetime.datetime.now() - t0).seconds
             if dt > 2:
