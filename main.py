@@ -88,10 +88,22 @@ class camera_box:
     def callback_shutter(self,channel):
         gpio.remove_event_detect(channel)
         t0 = datetime.datetime.now()
-        while gpio.input(channel) and (datetime.datetime.now()-t0).seconds < 6:
-            pass
-        t1 = datetime.datetime.now()
-        if (t1-t0).seconds > 5:
+        dt = t0-t0
+        while gpio.input(channel) and dt.seconds < 6:
+            dt = datetime.datetime.now() - t0
+            if dt.seconds > 2:
+                self.display.show_int(int(6-dt))
+                print(dt.seconds)
+        if dt.seconds > 5:
+            self.display.show_null()
+            time.sleep(0.3)
+            self.display.display.Clear()
+            time.sleep(0.3)
+            self.display.show_null()
+            time.sleep(0.3)
+            self.display.display.Clear()
+            time.sleep(0.3)
+            self.display.show_null()
             os.system('shutdown 0')
         # print('Button pressed, channel '+str(channel))
         self.shutter()
