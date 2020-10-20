@@ -107,11 +107,12 @@ class camera_box:
         # print('callback:',gpio.input(BUTTON_CHANNEL))
         while not gpio.input(BUTTON_CHANNEL) and dt < 5.5:
             dt = (datetime.datetime.now() - t0).seconds
-            if dt > 2:
+            if dt >= 2:
                 if display is None:
                     display = Display()
-                display.show_int(int(5-dt))
+                display.show_int(int(6-dt))
                 print(dt)
+                time.sleep(0.2)
         if dt >= 5:
             self.shutdown()
         else:
